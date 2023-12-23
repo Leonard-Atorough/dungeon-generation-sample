@@ -30,7 +30,6 @@ func _draw():
 			for y in range(max_h):
 				tilemap.set_cell(0, Vector2i(x, y), 0, Vector2i(0,1))
 
-
 		for x in range(leaf.size.x):
 			for y in range(leaf.size.y):
 				if not is_inside_padding(x, y, leaf, padding):
@@ -40,11 +39,11 @@ func _draw():
 
 		for path in paths:
 			if path['left'].y == path['right'].y:
-				for i in range(path['right'].x -path['left'].x):
+				for i in range(path['right'].x - path['left'].x):
 					tilemap.set_cell(3, Vector2i(path['left'].x+i, path['left'].y), 0, Vector2i(2,1))
-					var neighbour_down = tilemap.get_neighbor_cell(Vector2i(path['left'].x+i, path['left'].y), 4)
-					if not is_in_zone(neighbour_down.x, neighbour_down.y, leaf):
-						tilemap.set_cell(3, neighbour_down, 0, Vector2i(2,2))
+#					var neighbour_down = tilemap.get_neighbor_cell(Vector2i(path['left'].x+i, path['left'].y), 4)
+#					if not is_in_zone(neighbour_down.x, neighbour_down.y, leaf):
+#						tilemap.set_cell(3, neighbour_down, 0, Vector2i(2,2))
 			else:
 				for i in range(path['right'].y -path['left'].y):
 					tilemap.set_cell(3, Vector2i(path['left'].x, path['left'].y+i), 0, Vector2i(2,1))
@@ -57,7 +56,7 @@ func is_wall(x, y, leaf, padding):
 	return x == padding.x or y == padding.y or x == leaf.size.x - padding.z or y == leaf.size.y - padding.w
 	
 func is_in_zone(x, y, leaf):
-	return x > leaf.position.x and x <= leaf.size.x and y <= leaf.position.y and y >= leaf.size.y
+	return x > leaf.position.x and x <= leaf.position.x + leaf.size.x and y <= leaf.position.y and y >= leaf.size.y + leaf.position.y
 
 func set_wall(x, y, leaf, padding):
 	if y > padding.y and y < leaf.size.y - padding.w:
