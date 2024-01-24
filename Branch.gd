@@ -8,7 +8,6 @@ var right_child: Branch
 var position: Vector2i
 var size: Vector2i
 
-
 func _init(position, size):
 	self.position = position
 	self.size = size
@@ -43,3 +42,4 @@ func split(remaining, paths):
 
 func get_center():
 	return Vector2i(position.x + size.x / 2, position.y + size.y / 2 )
+	
